@@ -12,11 +12,17 @@
 
 <body>
   <nav>
-    <a href="index.html">Tatiana Caines</a>
-    <a href="about.html">About</a>
-    <a href="gallery.html" class="active">Gallery</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <div class="nav-bar">
+    <div class="logo">Tatiana Caines</div>
+    <div class="hamburger" id="hamburger">&#9776;</div> <!-- ☰ icon -->
+    <div class="nav-links" id="nav-links">
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+<div class="nav-spacer"></div> <!-- keep the same spacer -->
 
   <div class="nav-spacer"></div>
 
@@ -202,5 +208,13 @@
   </main>
 
   <script src="script.js"></script>
+  <script>
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+
+hamburger.addEventListener('click', () => {
+  navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+});
+</script>
 </body>
 </html>

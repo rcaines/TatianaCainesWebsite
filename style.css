@@ -144,7 +144,43 @@ nav a.active {
     font-size: 14px;
     padding: 0.5rem;
   }
+  .nav-links {
+    display: none;        /* hide links initially */
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 60px;           /* below navbar */
+    right: 0;
+    width: 200px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    padding: 1rem;
+    z-index: 100;
+  }
+
+  .nav-links a {
+    margin: 0.5rem 0;
+    font-size: 16px;
+  }
+
+  .hamburger {
+    display: block;       /* show hamburger icon */
+  }
 }
+
+/* Base navbar styles (keep your desktop styles as is) */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Hamburger menu - hidden on desktop */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
 
 /* Headings */
 h1, h2{

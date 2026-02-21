@@ -137,3 +137,4 @@ if (modal && modalImg && modalText && modalContent) {
   }
 
 });
+
