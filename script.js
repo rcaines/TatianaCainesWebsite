@@ -142,7 +142,7 @@ const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
 
 hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open'); // open/close menu
+  navLinks.classList.toggle('open'); // toggles menu
 });
 
 
