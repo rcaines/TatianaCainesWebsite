@@ -98,6 +98,47 @@ nav a.active {
   .content {
     padding: 140px 15px 40px;
   }
+
+  .content {
+    padding: 120px 10px 30px; /* smaller padding */
+  }
+
+  .content h1 {
+    font-size: clamp(24px, 5vw, 32px);
+  }
+
+  .content p {
+    font-size: clamp(14px, 4vw, 16px);
+    line-height: 1.4;
+  }
+  nav a {
+    margin: 0 1rem;         /* smaller spacing between links */
+    font-size: 14px;        /* shrink text */
+    letter-spacing: 0.1em;  /* tighten letters */
+  }
+
+  nav {
+    height: 60px;            /* shorter navbar */
+  }
+
+  .nav-spacer {
+    height: 60px;            /* match new navbar height */
+  }
+
+  .hero-image-container {
+    width: 100%;  /* full screen width */
+    margin: 1rem auto;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero p {
+    font-size: 14px;
+    padding: 0.5rem;
+  }
 }
 
 /* Headings */
