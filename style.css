@@ -157,6 +157,10 @@ nav a.active {
     z-index: 100;
   }
 
+  .nav-links.open {
+    display: flex; /* show menu when open */
+  }
+
   .nav-links a {
     margin: 0.5rem 0;
     font-size: 16px;
@@ -164,6 +168,8 @@ nav a.active {
 
   .hamburger {
     display: block;       /* show hamburger icon */
+    font-size: 28px;
+    cursor: pointer;
   }
 }
 
