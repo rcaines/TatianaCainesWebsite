@@ -17,33 +17,75 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 /* ---------- GALLERY MODAL ---------- */
+
 const modal = document.getElementById("modal");
 const modalImg = document.getElementById("modal-img");
 const modalText = document.getElementById("modal-text");
 
-if (modal && modalImg && modalText) {
+// Create close button dynamically (so you don't have to edit HTML)
+const modalContent = document.querySelector(".modal-content");
+
+if (modal && modalImg && modalText && modalContent) {
+
+  // Add close button if it doesn't exist
+  let closeBtn = document.querySelector(".close-modal");
+  if (!closeBtn) {
+    closeBtn = document.createElement("button");
+    closeBtn.classList.add("close-modal");
+    closeBtn.innerHTML = "&times;";
+    modalContent.prepend(closeBtn);
+  }
+
+  // Open modal
   document.querySelectorAll(".gallery-item").forEach(item => {
     item.addEventListener("click", () => {
+
       const imgSrc = item.querySelector("img").src;
       const title = item.dataset.title || "";
       const description = item.dataset.description || "";
 
+      // Split description into paragraphs
       const paragraphs = description
         .split("||")
         .map(text => `<p>${text.trim()}</p>`)
         .join("");
 
-      modal.style.display = "flex";
       modalImg.src = imgSrc;
-      modalText.innerHTML = `<strong>${title}</strong>${paragraphs}`;
+      modalText.innerHTML = `
+        <h2 class="modal-title">${title}</h2>
+        ${paragraphs}
+      `;
+
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden"; // Prevent background scroll
     });
   });
 
-  modal.addEventListener("click", e => {
+  // Close when clicking X button
+  closeBtn.addEventListener("click", () => {
+    closeModal();
+  });
+
+  // Close when clicking outside modal-content
+  modal.addEventListener("click", (e) => {
     if (e.target === modal) {
-      modal.style.display = "none";
+      closeModal();
     }
   });
+
+  // Close on ESC key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeModal();
+    }
+  });
+
+  function closeModal() {
+    modal.style.display = "none";
+    modalImg.src = "";
+    modalText.innerHTML = "";
+    document.body.style.overflow = "auto"; // Restore scroll
+  }
 }
 
 
