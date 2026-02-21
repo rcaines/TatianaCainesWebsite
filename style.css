@@ -144,6 +144,7 @@ nav a.active {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 1001;
   }
 
   nav a {
@@ -209,7 +210,7 @@ nav a.active {
     left: 10px;
     font-size: 28px;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 1002;
   }
 }
 
