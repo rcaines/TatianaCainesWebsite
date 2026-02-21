@@ -211,9 +211,11 @@ nav a.active {
 
   .hamburger {
     display: block;
+    position:relative;
     font-size: 28px;
     cursor: pointer;
     z-index: 1002; /* above everything else */
+    color: #1f2228;
   }
 }
 
@@ -229,6 +231,8 @@ nav a.active {
   display: none;
   font-size: 28px;
   cursor: pointer;
+  color: #1f2228;
+  position:relative;
 }
 
 
