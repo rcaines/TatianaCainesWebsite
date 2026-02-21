@@ -13,6 +13,13 @@ body {
   font-weight: bold;
 }
 
+.logo a {
+  text-decoration: none;
+  color: #1f2228; /* match your navbar text color */
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .hamburger {
   display: none;
 }
@@ -161,15 +168,15 @@ nav a.active {
     padding: 0.5rem;
   }
   .nav-links {
-    display: none;        /* hide links initially */
+    display: none;           /* hidden by default */
     flex-direction: column;
-    background-color: #fff;
     position: absolute;
-    top: 60px;           /* below navbar */
+    top: 60px;               /* right below navbar */
     right: 0;
+    background-color: #fff;
     width: 200px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     z-index: 999;
   }
 
