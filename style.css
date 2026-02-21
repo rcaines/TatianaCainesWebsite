@@ -208,6 +208,7 @@ nav a.active {
     display: block;
     position: absolute;
     left: 10px;
+    top: 20px;
     font-size: 28px;
     cursor: pointer;
     z-index: 1002;
