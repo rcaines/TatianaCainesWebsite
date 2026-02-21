@@ -143,6 +143,11 @@ nav a.active {
     line-height: 1.4;
   }
 
+  .contact-page p {
+    text-align: center;   /* center on small screens */
+    padding: 0 1rem;     /* small padding from edges */
+  }
+
   .logo {
     position: relative;   /* remove absolute to avoid covering hamburger */
     text-align: center;
@@ -217,6 +222,8 @@ nav a.active {
     z-index: 1002;   /* above logo & navbar links */
     cursor: pointer;
   }
+
+
 }
 
 /* Base navbar styles (keep your desktop styles as is) */
@@ -500,4 +507,20 @@ h3{
   text-align: left;
   align-items: center; /* centers flex children horizontally */
   padding: 140px;
+}
+
+.contact-page h1,
+.contact-page h2,
+.contact-page p {
+    text-align: center;   /* centers all text */
+    margin: 0 auto 1rem;  /* adds spacing below each element */
+    max-width: 700px;     /* keeps paragraphs from stretching too wide */
+}
+
+.home-page .content {
+  padding-top: 0;
+}
+
+.home-page .hero {
+    margin-top: 20px; /* optional fine-tune for image/text */
 }
