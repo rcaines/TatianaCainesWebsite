@@ -497,7 +497,7 @@ h3{
 /*Contact*/
 
 .contact-page {
-  text-align: center;
+  text-align: left;
   align-items: center; /* centers flex children horizontally */
   padding: 140px;
 }
