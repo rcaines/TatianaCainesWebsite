@@ -8,6 +8,15 @@ body {
   overflow-x: hidden;
 }
 
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.hamburger {
+  display: none;
+}
+
 /* Fixed Navigation */
 nav {
   position: fixed;
@@ -23,8 +32,11 @@ nav {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 .nav-bar {
-  position: relative;
-  height: 60px;
+  display: flex;
+  justify-content: space-between; /* logo left, links right */
+  align-items: center;
+  height: 80px;
+  padding: 0 2rem;
 }
 
 /* Navigation links */
@@ -50,6 +62,10 @@ nav a.active {
   width: 100%;
 }
 
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
 
 /* Content wrapper */
 .content {
