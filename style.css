@@ -154,7 +154,7 @@ nav a.active {
     width: 200px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     padding: 1rem;
-    z-index: 100;
+    z-index: 999;
   }
 
   .nav-links.open {
@@ -164,6 +164,7 @@ nav a.active {
   .nav-links a {
     margin: 0.5rem 0;
     font-size: 16px;
+    text-align: right;
   }
 
   .hamburger {
