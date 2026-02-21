@@ -114,11 +114,16 @@ nav a.active {
   nav a {
     margin: 0 1rem;         /* smaller spacing between links */
     font-size: 14px;        /* shrink text */
-    letter-spacing: 0.1em;  /* tighten letters */
+    letter-spacing: 0.05em;  /* tighten letters */
   }
 
   nav {
     height: 60px;            /* shorter navbar */
+    padding: 0 10px;         /* add a little side padding */
+  }
+
+  .nav-bar {
+    height: 60px;            /* match new nav height */
   }
 
   .nav-spacer {
