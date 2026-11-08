@@ -3,36 +3,42 @@
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="about-page">
   <nav>
-   <div class="nav-bar">
-    <div class="hamburger" id="hamburger">&#9776;</div>
+  <div class="nav-bar">
+
     <div class="logo">
       <a href="index.html">Tatiana Caines</a>
     </div>
+
+    <button class="hamburger" id="hamburger"
+      aria-label="Open navigation" aria-expanded="false">
+      &#9776;
+    </button>
+
     <div class="nav-links" id="nav-links">
       <a href="about.html">About</a>
       <a href="gallery.html">Gallery</a>
       <a href="contact.html">Contact</a>
     </div>
+
   </div>
 </nav>
-<div class="nav-spacer"></div> <!-- keep the same spacer -->
 
-  <div id="painting-bg" class="bg-full" style="background-image: url('images/image1.jpeg');"></div>
+<div class="nav-spacer"></div>
 
   <main class="content">
   <h1>Artist Statement</h1>
+  <div class="about-intro">
   <p>The vast Australian landscape, with its dramatic light and weathered textures, has become a constant source of inspiration in my paintings. While my professional journey began in engineering, a deep love for art blossomed later in life. Formal art instruction at Lavender Art School and private lessons with Margaret Hadfield honed my skills and helped me refine my artistic voice.</p>
   <p>I work in different mediums, but primarily in oil paints, creating landscapes that capture a sense of place and history. Through dramatic light and color, I strive to evoke feelings of tranquility and invite viewers to contemplate the beauty and stories held within the Australian land.</p>
   <p>Sharing my artistic perspective with others brings me immense joy. Each piece is crafted with love and care, using high-quality materials to ensure lasting beauty.</p>
-
+  </div>
 
   <!-- Image Carousel -->
 <div class="carousel">
@@ -42,9 +48,8 @@
     <img src="images/orroralshearingshed.jpg" alt="Orroral Shearing Shed" class="carousel-image active">
     <img src="images/seaeagle.jpg" alt="Sea Eagle" class="carousel-image">
     <img src="images/dreamscape.jpg" alt="Dreamscape" class="carousel-image">
-    <img src="images/touchoflight.jpg" alt="Touch Of Light" class="carousel-image">
     <img src="images/throughthehaze.jpg" alt="Through the Haze" class="carousel-image">
-    <img src="images/dreamscape.jpg" alt="Dreamscape" class="carousel-image">
+    <img src="images/touchoflight.jpg" alt="Touch Of Light" class="carousel-image">
     <img src="images/shoalbay.jpg" alt="Shoal Bay" class="carousel-image">
     <img src="images/tidbinbillagrasstrees.jpg" alt="Tidbinbilla Grasstrees" class="carousel-image">
     <img src="images/oceansbreath.jpg" alt="Oceans Breath" class="carousel-image">
