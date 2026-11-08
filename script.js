@@ -1,147 +1,326 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ---------- SCROLL-BASED DIAGONAL BACKGROUND ---------- */
-  const bg = document.getElementById("painting-bg");
-  const aboutText = document.querySelector(".content");
+  /* =====================================
+     PAGE LOAD
+  ===================================== */
 
-  if (bg || aboutText) {
-    window.addEventListener("scroll", () => {
-      const scrollY = window.scrollY;
+  document.body.classList.add("page-loaded");
 
-      if (bg) {
-        const moveX = scrollY * 0.04;
-        const moveY = scrollY * 0.03;
-        bg.style.transform = `translate(${-moveX}px, ${-moveY}px)`;
+
+  /* =====================================
+     MOBILE NAVIGATION
+  ===================================== */
+
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("nav-links");
+
+  if (hamburger && navLinks) {
+
+    hamburger.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+
+      hamburger.innerHTML = isOpen ? "&times;" : "&#9776;";
+      hamburger.setAttribute("aria-expanded", isOpen);
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        hamburger.innerHTML = "&#9776;";
+        hamburger.setAttribute("aria-expanded", "false");
+      });
+    });
+
+  }
+
+
+  /* =====================================
+     ACTIVE NAVIGATION LINK
+  ===================================== */
+
+  const currentPage =
+    window.location.pathname.split("/").pop() || "index.html";
+
+  document.querySelectorAll(".nav-links a").forEach(link => {
+
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+
+  });
+
+
+  
+  
+/* =====================================
+   SCROLL REVEAL ANIMATIONS
+===================================== */
+
+const revealElements = document.querySelectorAll(
+  ".content h1, .content h2, .content h3, " +
+  ".content p, .gallery-item, .carousel, " +
+  ".hero-image-container"
+);
+
+if ("IntersectionObserver" in window) {
+
+  document.documentElement.classList.add("js-reveal");
+
+  const observer = new IntersectionObserver((entries, observer) => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
       }
+
     });
-  }
 
-/* ---------- GALLERY MODAL ---------- */
-
-const modal = document.getElementById("modal");
-const modalImg = document.getElementById("modal-img");
-const modalText = document.getElementById("modal-text");
-
-// Create close button dynamically (so you don't have to edit HTML)
-const modalContent = document.querySelector(".modal-content");
-
-if (modal && modalImg && modalText && modalContent) {
-
-  // Add close button if it doesn't exist
-  let closeBtn = document.querySelector(".close-modal");
-  if (!closeBtn) {
-    closeBtn = document.createElement("button");
-    closeBtn.classList.add("close-modal");
-    closeBtn.innerHTML = "&times;";
-    modalContent.prepend(closeBtn);
-  }
-
-  // Open modal
-  document.querySelectorAll(".gallery-item").forEach(item => {
-    item.addEventListener("click", () => {
-
-      const imgSrc = item.querySelector("img").src;
-      const title = item.dataset.title || "";
-      const description = item.dataset.description || "";
-
-      // Split description into paragraphs
-      const paragraphs = description
-        .split("||")
-        .map(text => `<p>${text.trim()}</p>`)
-        .join("");
-
-      modalImg.src = imgSrc;
-      modalText.innerHTML = `
-        <h2 class="modal-title">${title}</h2>
-        ${paragraphs}
-      `;
-
-      modal.style.display = "flex";
-      document.body.style.overflow = "hidden"; // Prevent background scroll
-    });
+  }, {
+    threshold: 0,
+    rootMargin: "0px 0px 100px 0px"
   });
 
-  // Close when clicking X button
-  closeBtn.addEventListener("click", () => {
-    closeModal();
+  revealElements.forEach(element => {
+    element.classList.add("reveal");
+    observer.observe(element);
   });
 
-  // Close when clicking outside modal-content
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
+} else {
+
+  revealElements.forEach(element => {
+    element.classList.add("visible");
   });
 
-  // Close on ESC key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeModal();
-    }
-  });
-
-  function closeModal() {
-    modal.style.display = "none";
-    modalImg.src = "";
-    modalText.innerHTML = "";
-    document.body.style.overflow = "auto"; // Restore scroll
-  }
 }
 
 
-  /* ---------- CAROUSEL (ABOUT PAGE ONLY) ---------- */
+
+  /* =====================================
+     GALLERY MODAL
+  ===================================== */
+
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modal-img");
+  const modalText = document.getElementById("modal-text");
+  const modalContent = document.querySelector(".modal-content");
+
+  if (modal && modalImg && modalText && modalContent) {
+
+    const closeBtn = modal.querySelector(".close-modal");
+
+    function openModal(item) {
+
+      const image = item.querySelector("img");
+
+      if (!image) return;
+
+      const title = item.dataset.title || image.alt || "";
+      const description = item.dataset.description || "";
+
+      modalImg.src = image.src;
+      modalImg.alt = title;
+
+      modalText.replaceChildren();
+
+      const heading = document.createElement("h2");
+      heading.className = "modal-title";
+      heading.textContent = title;
+
+      modalText.appendChild(heading);
+
+      description.split("||").forEach(text => {
+
+        const trimmed = text.trim();
+
+        if (trimmed) {
+          const paragraph = document.createElement("p");
+          paragraph.textContent = trimmed;
+          modalText.appendChild(paragraph);
+        }
+
+      });
+
+      modal.style.display = "flex";
+
+      requestAnimationFrame(() => {
+        modal.classList.add("show");
+      });
+
+      document.body.style.overflow = "hidden";
+    }
+
+
+    function closeModal() {
+
+      modal.classList.remove("show");
+
+      setTimeout(() => {
+        modal.style.display = "none";
+        modalImg.src = "";
+        modalText.replaceChildren();
+        document.body.style.overflow = "";
+      }, 350);
+
+    }
+
+
+    document.querySelectorAll(".gallery-item").forEach(item => {
+
+      item.addEventListener("click", () => {
+        openModal(item);
+      });
+
+    });
+
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", closeModal);
+    }
+
+
+    modal.addEventListener("click", event => {
+
+      if (event.target === modal) {
+        closeModal();
+      }
+
+    });
+
+
+    document.addEventListener("keydown", event => {
+
+      if (event.key === "Escape" && modal.style.display === "flex") {
+        closeModal();
+      }
+
+    });
+
+  }
+
+
+  /* =====================================
+     ABOUT PAGE CAROUSEL
+  ===================================== */
+
   const carousel = document.querySelector(".carousel");
+
   if (carousel) {
+
     const images = carousel.querySelectorAll(".carousel-image");
     const nextBtn = carousel.querySelector(".carousel-btn.next");
     const prevBtn = carousel.querySelector(".carousel-btn.prev");
 
     if (images.length && nextBtn && prevBtn) {
+
       let currentIndex = 0;
       let timer;
 
       function showImage(index) {
-        images.forEach(img => img.classList.remove("active"));
+
+        images.forEach(image => {
+          image.classList.remove("active");
+        });
+
         images[index].classList.add("active");
+
       }
+
 
       function nextImage() {
+
         currentIndex = (currentIndex + 1) % images.length;
         showImage(currentIndex);
+
       }
+
 
       function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
+
+        currentIndex =
+          (currentIndex - 1 + images.length) % images.length;
+
         showImage(currentIndex);
+
       }
 
-      nextBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
+
+      function restartAuto() {
+
+        clearInterval(timer);
+
+        if (!window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches) {
+          timer = setInterval(nextImage, 5000);
+        }
+
+      }
+
+
+      nextBtn.addEventListener("click", () => {
         nextImage();
         restartAuto();
       });
 
-      prevBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
+
+      prevBtn.addEventListener("click", () => {
         prevImage();
         restartAuto();
       });
 
-      function restartAuto() {
+
+      carousel.addEventListener("mouseenter", () => {
         clearInterval(timer);
-        timer = setInterval(nextImage, 4000);
-      }
+      });
+
+
+      carousel.addEventListener("mouseleave", restartAuto);
+
 
       restartAuto();
+
     }
+
   }
 
-});
 
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('nav-links');
+  /* =====================================
+     BACKGROUND PARALLAX
+     Retained for existing background images
+  ===================================== */
 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open'); // toggles menu
+  const bg = document.getElementById("painting-bg");
+
+  if (bg && window.matchMedia(
+    "(prefers-reduced-motion: no-preference)"
+  ).matches) {
+
+    let ticking = false;
+
+    window.addEventListener("scroll", () => {
+
+      if (!ticking) {
+
+        requestAnimationFrame(() => {
+
+          const scrollY = window.scrollY;
+
+          bg.style.transform =
+            `translate(${-scrollY * 0.025}px, ${-scrollY * 0.02}px)`;
+
+          ticking = false;
+
+        });
+
+        ticking = true;
+      }
+
+    }, { passive: true });
+
+  }
+
 });
 
