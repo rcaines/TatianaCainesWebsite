@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   
-  
+
 /* =====================================
    SCROLL REVEAL ANIMATIONS
 ===================================== */
